@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Tier {
+  ESTABLISHED
+  EXPLORATORY
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum FeedbackAction {
+  ACCEPTED
+  DISMISSED
+  FLAGGED_WRONG
+}
+
+model RubricCriterion {
+  id             String   @id @default(cuid())
+  tier           Tier
+  source         String
+  category       String
+  description    String
+  confidenceNote String?
+  createdAt      DateTime @default(now())
+
+  findings       Finding[]
+}
+
+model Analysis {
+  id        String    @id @default(cuid())
+  userId    String
+  imageUrl  String
+  createdAt DateTime  @default(now())
+
+  findings  Finding[]
+}
+
+model Finding {
+  id          String          @id @default(cuid())
+  analysisId  String
+  analysis    Analysis        @relation(fields: [analysisId], references: [id])
+  criterionId String
+  criterion   RubricCriterion @relation(fields: [criterionId], references: [id])
+  severity    Severity
+  explanation String
+  feedback    Feedback?
+}
+
+model Feedback {
+  id        String         @id @default(cuid())
+  findingId String         @unique
+  finding   Finding        @relation(fields: [findingId], references: [id])
+  userId    String
+  action    FeedbackAction
+  createdAt DateTime       @default(now())
+}
