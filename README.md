@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UX Critique AI
 
-## Getting Started
+An AI-powered UI/UX critique tool that evaluates interface screenshots against a structured, confidence-aware rubric — distinguishing well-established usability/trust research from an original, smaller-scale study, rather than presenting all findings with equal certainty.
 
-First, run the development server:
+## Why this exists
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Most "AI reviews your UI" tools apply a single undifferentiated rubric and present every finding with the same confidence. This project takes a different approach: findings are explicitly tiered.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Established** — grounded in peer-reviewed trust and HCI research (Mayer et al.'s trust model, Hancock et al.'s elaborated trust model, McKnight et al., Nielsen's usability heuristics).
+- **Exploratory** — derived from an original empirical study (my Master's thesis, *Design Framework for Trustworthy User Interfaces*, University of Turku, 2026), which validated a Trustworthy UI Design Framework (TUIDF) against a control prototype across two focus groups. Findings from this tier are flagged with their actual confidence limitations rather than stated as fact.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The tool is designed to keep learning: every finding can be accepted, dismissed, or flagged by a user, feeding a growing signal on which criteria actually hold up in practice — an explicit response to validating a framework on a small sample size, rather than pretending it's settled.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Stack
 
-## Learn More
+- **Frontend:** Next.js (App Router), TypeScript, Tailwind, shadcn/ui
+- **Backend:** Next.js API routes
+- **Database:** PostgreSQL via Supabase, accessed with Prisma 7 (driver adapter pattern)
+- **File storage:** Supabase Storage
+- **AI:** Anthropic API (vision-capable model), structured JSON output validated with Zod
+- **Deployment:** Vercel
 
-To learn more about Next.js, take a look at the following resources:
+## Status
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+🚧 In active development.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- [x] Project scaffold, database schema, seeded rubric criteria
+- [x] Screenshot upload pipeline (storage + database record)
+- [ ] Claude API integration (rubric-driven critique generation)
+- [ ] Results UI with tier-based display
+- [ ] Feedback loop (accept/dismiss/flag per finding)
+- [ ] Tests + CI
+- [ ] Production hardening (rate limiting, error tracking)
 
-## Deploy on Vercel
+## Background
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project extends the rubric developed and empirically tested in my Master's thesis at the University of Turku, applying it as a working tool rather than a static checklist.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Live demo
+
+[your-vercel-url-here]
