@@ -38,4 +38,4 @@ This project extends the rubric developed and empirically tested in my Master's 
 
 ## Live demo
 
-[your-vercel-url-here]
+You will find the live demo here once it is up.
