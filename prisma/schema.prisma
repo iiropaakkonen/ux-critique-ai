@@ -16,6 +16,7 @@ enum Severity {
   LOW
   MEDIUM
   HIGH
+  NOT_APPLICABLE
 }
 
 enum FeedbackAction {
