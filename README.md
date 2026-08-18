@@ -26,9 +26,9 @@ The tool is designed to keep learning: every finding can be accepted, dismissed,
 
 - [x] Project scaffold, database schema, seeded rubric criteria
 - [x] Screenshot upload pipeline (storage + database record)
-- [ ] Claude API integration (rubric-driven critique generation)
-- [ ] Results UI with tier-based display
-- [ ] Feedback loop (accept/dismiss/flag per finding)
+- [x] Claude API integration (rubric-driven critique generation)
+- [x] Results UI with tier-based display
+- [x] Feedback loop (accept/dismiss/flag per finding)
 - [ ] Tests + CI
 - [ ] Production hardening (rate limiting, error tracking)
 
